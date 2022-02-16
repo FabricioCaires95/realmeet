@@ -11,8 +11,8 @@ phases:
       - mvn clean package
 
 artifacts:
-  file:
-    - service/target/.*jar
+  files:
+    - service/target/*.jar
   discard-paths: yes
 
 cache:
