@@ -22,7 +22,7 @@ public class RoomService {
 
     public RoomDTO getRoom(Long id) {
         requireNonNull(id);
-        Room room = roomRepository.findById(id).orElseThrow(RoomNotFoundException::new);
+        Room room = roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException("Room not found"));
         return roomMapper.fromEntityToDto(room);
     }
 }
