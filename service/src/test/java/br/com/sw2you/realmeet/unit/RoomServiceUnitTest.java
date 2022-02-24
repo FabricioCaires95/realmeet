@@ -15,7 +15,6 @@ import static br.com.sw2you.realmeet.utils.TestDataCreator.roomBuilder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-
 class RoomServiceUnitTest extends BaseUnitTest {
 
     private RoomService victim;
