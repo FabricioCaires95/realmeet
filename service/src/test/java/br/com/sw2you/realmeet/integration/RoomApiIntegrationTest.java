@@ -17,7 +17,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.junit.jupiter.api.Test;
 
 class RoomApiIntegrationTest extends BaseIntegrationTest {
-
     @Autowired
     private RoomApi roomApi;
 

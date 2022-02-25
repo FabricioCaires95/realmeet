@@ -18,9 +18,9 @@ public class ControllerExceptionHandler {
     private ResponseEntity<Object> buildResponseEntity(HttpStatus httpStatus, Exception exception) {
         return new ResponseEntity<>(
             new ResponseError()
-               .status(httpStatus.getReasonPhrase())
-               .code(httpStatus.value())
-               .message(exception.getMessage()),
+                .status(httpStatus.getReasonPhrase())
+                .code(httpStatus.value())
+                .message(exception.getMessage()),
             httpStatus
         );
     }
