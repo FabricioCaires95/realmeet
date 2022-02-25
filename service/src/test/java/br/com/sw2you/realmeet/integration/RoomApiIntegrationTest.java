@@ -11,10 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import br.com.sw2you.realmeet.api.facade.RoomApi;
 import br.com.sw2you.realmeet.core.BaseIntegrationTest;
 import br.com.sw2you.realmeet.domain.repository.RoomRepository;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.HttpClientErrorException;
-
-import org.junit.jupiter.api.Test;
 
 class RoomApiIntegrationTest extends BaseIntegrationTest {
     @Autowired
