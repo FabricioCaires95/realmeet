@@ -1,26 +1,17 @@
 package br.com.sw2you.realmeet.integration;
 
-import static br.com.sw2you.realmeet.utils.TestConstants.DEFAULT_ROOM_ID;
 import static br.com.sw2you.realmeet.utils.TestDataCreator.newCreateAllocationDTO;
-import static br.com.sw2you.realmeet.utils.TestDataCreator.newCreateRoomDTO;
 import static br.com.sw2you.realmeet.utils.TestDataCreator.roomBuilder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.sw2you.realmeet.api.facade.AllocationApi;
-import br.com.sw2you.realmeet.api.facade.RoomApi;
-import br.com.sw2you.realmeet.api.model.CreateRoomDTO;
-import br.com.sw2you.realmeet.api.model.UpdateRoomDTO;
 import br.com.sw2you.realmeet.core.BaseIntegrationTest;
 import br.com.sw2you.realmeet.domain.repository.AllocationRepository;
 import br.com.sw2you.realmeet.domain.repository.RoomRepository;
-import br.com.sw2you.realmeet.utils.TestDataCreator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.client.HttpClientErrorException;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 class AllocationApiIntegrationTest extends BaseIntegrationTest {
     @Autowired
