@@ -1,8 +1,11 @@
 package br.com.sw2you.realmeet.integration;
 
+import static br.com.sw2you.realmeet.util.DateUtils.now;
+import static br.com.sw2you.realmeet.utils.TestDataCreator.allocationBuilder;
 import static br.com.sw2you.realmeet.utils.TestDataCreator.newCreateAllocationDTO;
 import static br.com.sw2you.realmeet.utils.TestDataCreator.roomBuilder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -55,5 +58,31 @@ class AllocationApiIntegrationTest extends BaseIntegrationTest {
     @Test
     void testCreateAllocationWhenRoomDoesNotExist() {
         assertThrows(HttpClientErrorException.NotFound.class, () -> api.createAllocation(newCreateAllocationDTO()));
+    }
+
+    @Test
+    void testDeleteAllocationSuccess() {
+        var room = roomRepository.saveAndFlush(roomBuilder().build());
+        var allocationId = allocationRepository.saveAndFlush(allocationBuilder(room).build()).getId();
+
+        api.deleteAllocation(allocationId);
+        assertFalse(allocationRepository.findById(allocationId).isPresent());
+    }
+
+    @Test
+    void testDeleteAllocationInThePast() {
+        var room = roomRepository.saveAndFlush(roomBuilder().build());
+        var allocationId = allocationRepository
+            .saveAndFlush(
+                allocationBuilder(room).startAt(now().minusDays(1)).endAt(now().minusDays(1).plusHours(1)).build()
+            )
+            .getId();
+
+        assertThrows(HttpClientErrorException.UnprocessableEntity.class, () -> api.deleteAllocation(allocationId));
+    }
+
+    @Test
+    void testDeleteAllocationDoesNotExist() {
+        assertThrows(HttpClientErrorException.NotFound.class, () -> api.deleteAllocation(1L));
     }
 }
