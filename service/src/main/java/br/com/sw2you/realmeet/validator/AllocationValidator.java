@@ -6,6 +6,7 @@ import static br.com.sw2you.realmeet.validator.ValidatorConstants.ALLOCATION_EMP
 import static br.com.sw2you.realmeet.validator.ValidatorConstants.ALLOCATION_EMPLOYEE_NAME;
 import static br.com.sw2you.realmeet.validator.ValidatorConstants.ALLOCATION_EMPLOYEE_NAME_MAX_LENGTH;
 import static br.com.sw2you.realmeet.validator.ValidatorConstants.ALLOCATION_END_AT;
+import static br.com.sw2you.realmeet.validator.ValidatorConstants.ALLOCATION_ID;
 import static br.com.sw2you.realmeet.validator.ValidatorConstants.ALLOCATION_MAX_DURATION_SECONDS;
 import static br.com.sw2you.realmeet.validator.ValidatorConstants.ALLOCATION_START_AT;
 import static br.com.sw2you.realmeet.validator.ValidatorConstants.ALLOCATION_SUBJECT;
@@ -19,6 +20,7 @@ import static br.com.sw2you.realmeet.validator.ValidatorUtils.validateRequired;
 import static java.time.Duration.between;
 
 import br.com.sw2you.realmeet.api.model.CreateAllocationDTO;
+import br.com.sw2you.realmeet.api.model.UpdateAllocationDTO;
 import br.com.sw2you.realmeet.domain.repository.AllocationRepository;
 import java.time.OffsetDateTime;
 import org.springframework.stereotype.Component;
@@ -37,6 +39,16 @@ public class AllocationValidator {
         validateEmployeeName(createAllocationDto.getEmployeeName(), validationErrors);
         validateEmployeeEmail(createAllocationDto.getEmployeeEmail(), validationErrors);
         validateDates(createAllocationDto.getStartAt(), createAllocationDto.getEndAt(), validationErrors);
+        throwOnError(validationErrors);
+    }
+
+    public void validate(Long allocationId, UpdateAllocationDTO updateAllocationDTO) {
+        var validationErrors = new ValidationErrors();
+
+        validateRequired(allocationId, ALLOCATION_ID, validationErrors);
+        validateSubject(updateAllocationDTO.getSubject(), validationErrors);
+        validateDates(updateAllocationDTO.getStartAt(), updateAllocationDTO.getEndAt(), validationErrors);
+
         throwOnError(validationErrors);
     }
 

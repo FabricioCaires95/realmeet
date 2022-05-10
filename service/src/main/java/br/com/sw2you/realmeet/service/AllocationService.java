@@ -4,15 +4,19 @@ import static br.com.sw2you.realmeet.util.DateUtils.now;
 
 import br.com.sw2you.realmeet.api.model.AllocationDTO;
 import br.com.sw2you.realmeet.api.model.CreateAllocationDTO;
+import br.com.sw2you.realmeet.api.model.UpdateAllocationDTO;
+import br.com.sw2you.realmeet.domain.entity.Allocation;
 import br.com.sw2you.realmeet.domain.repository.AllocationRepository;
 import br.com.sw2you.realmeet.domain.repository.RoomRepository;
 import br.com.sw2you.realmeet.exception.AllocationCannotBeDeletedException;
+import br.com.sw2you.realmeet.exception.AllocationCannotBeUpdatedException;
 import br.com.sw2you.realmeet.exception.AllocationNotFoundException;
 import br.com.sw2you.realmeet.exception.RoomNotFoundException;
 import br.com.sw2you.realmeet.mapper.AllocationMapper;
-import br.com.sw2you.realmeet.util.DateUtils;
 import br.com.sw2you.realmeet.validator.AllocationValidator;
+import java.time.OffsetDateTime;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AllocationService {
@@ -44,14 +48,39 @@ public class AllocationService {
     }
 
     public void deleteAllocation(Long allocationId) {
-        var allocation = allocationRepository
-            .findById(allocationId)
-            .orElseThrow(() -> new AllocationNotFoundException("Allocation not found: " + allocationId));
+        var allocation = getAllocationOrThrow(allocationId);
 
-        if (allocation.getEndAt().isBefore(now())) {
+        if (isAllocationInThePast(allocation)) {
             throw new AllocationCannotBeDeletedException();
         }
 
         allocationRepository.delete(allocation);
+    }
+
+    @Transactional
+    public void updateAllocation(Long allocationId, UpdateAllocationDTO updateAllocationDTO) {
+        allocationValidator.validate(allocationId, updateAllocationDTO);
+        var allocation = getAllocationOrThrow(allocationId);
+
+        if (isAllocationInThePast(allocation)) {
+            throw new AllocationCannotBeUpdatedException();
+        }
+
+        allocationRepository.updateAllocation(
+            allocationId,
+            updateAllocationDTO.getSubject(),
+            updateAllocationDTO.getStartAt(),
+            updateAllocationDTO.getEndAt()
+        );
+    }
+
+    private boolean isAllocationInThePast(Allocation allocation) {
+        return allocation.getEndAt().isBefore(now());
+    }
+
+    private Allocation getAllocationOrThrow(Long allocationId) {
+        return allocationRepository
+            .findById(allocationId)
+            .orElseThrow(() -> new AllocationNotFoundException("Allocation not found: " + allocationId));
     }
 }

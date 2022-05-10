@@ -23,15 +23,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import br.com.sw2you.realmeet.core.BaseUnitTest;
 import br.com.sw2you.realmeet.domain.repository.AllocationRepository;
 import br.com.sw2you.realmeet.exception.InvalidRequestException;
-import br.com.sw2you.realmeet.util.DateUtils;
 import br.com.sw2you.realmeet.validator.AllocationValidator;
 import br.com.sw2you.realmeet.validator.ValidationError;
-import java.time.OffsetDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-class AllocationValidatorUnitTest extends BaseUnitTest {
+class AllocationCreateValidatorUnitTest extends BaseUnitTest {
     private AllocationValidator victim;
 
     @Mock
