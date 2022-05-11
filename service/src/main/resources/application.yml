@@ -26,3 +26,10 @@ logging:
   level:
     org.springframework: ERROR
     org.flywaydb: ERROR
+
+# =================================
+# = Real Meet
+# =================================
+realmeet:
+  allocations:
+    maxFilterLimits: 50

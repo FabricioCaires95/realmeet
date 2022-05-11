@@ -48,7 +48,7 @@ class AllocationApiFilterIntegrationTest extends BaseIntegrationTest {
             allocationBuilder(room).subject(DEFAULT_ALLOCATION_SUBJECT + 3).build()
         );
 
-        var result = api.listAllocations(null, null, null, null);
+        var result = api.listAllocations(null, null, null, null, null, null, null);
 
         assertEquals(3, result.size());
         assertEquals(allocation1.getSubject(), result.get(0).getSubject());
@@ -65,7 +65,7 @@ class AllocationApiFilterIntegrationTest extends BaseIntegrationTest {
         var allocation2 = allocationRepository.saveAndFlush(allocationBuilder(roomA).build());
         allocationRepository.saveAndFlush(allocationBuilder(roomB).build());
 
-        var result = api.listAllocations(null, roomA.getId(), null, null);
+        var result = api.listAllocations(null, roomA.getId(), null, null, null, null, null);
 
         assertEquals(2, result.size());
         assertEquals(allocation1.getId(), result.get(0).getId());
@@ -82,7 +82,7 @@ class AllocationApiFilterIntegrationTest extends BaseIntegrationTest {
         var allocation2 = allocationRepository.saveAndFlush(allocationBuilder(room).employee(employee1).build());
         allocationRepository.saveAndFlush(allocationBuilder(room).employee(employee2).build());
 
-        var result = api.listAllocations(employee1.getEmail(), null, null, null);
+        var result = api.listAllocations(employee1.getEmail(), null, null, null, null, null, null);
 
         assertEquals(2, result.size());
         assertEquals(allocation1.getEmployee().getEmail(), result.get(0).getEmployeeEmail());
@@ -106,7 +106,15 @@ class AllocationApiFilterIntegrationTest extends BaseIntegrationTest {
             allocationBuilder(room).startAt(baseStartAt.plusDays(1)).endAt(baseEndAt.plusDays(3).plusHours(1)).build()
         );
 
-        var result = api.listAllocations(null, null, baseStartAt.toLocalDate(), baseEndAt.toLocalDate());
+        var result = api.listAllocations(
+            null,
+            null,
+            baseStartAt.toLocalDate(),
+            baseEndAt.toLocalDate(),
+            null,
+            null,
+            null
+        );
 
         assertEquals(2, result.size());
         assertEquals(allocation1.getId(), result.get(0).getId());
@@ -122,7 +130,10 @@ class AllocationApiFilterIntegrationTest extends BaseIntegrationTest {
             DEFAULT_ALLOCATION_EMPLOYEE_EMAIL,
             DEFAULT_ROOM_ID,
             DEFAULT_ALLOCATION_START_AT.toLocalDate(),
-            DEFAULT_ALLOCATION_END_AT.toLocalDate()
+            DEFAULT_ALLOCATION_END_AT.toLocalDate(),
+            null,
+            null,
+            null
         );
 
         assertFalse(result.isEmpty());
