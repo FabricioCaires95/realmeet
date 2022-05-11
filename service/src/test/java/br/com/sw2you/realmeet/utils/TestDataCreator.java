@@ -28,7 +28,6 @@ public final class TestDataCreator {
     public static Allocation.Builder allocationBuilder(Room room) {
         return Allocation
             .newBuilder()
-            .id(DEFAULT_ALLOCATION_ID)
             .subject(DEFAULT_ALLOCATION_SUBJECT)
             .room(room)
             .employee(
