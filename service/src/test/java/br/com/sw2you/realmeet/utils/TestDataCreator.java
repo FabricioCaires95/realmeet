@@ -3,7 +3,6 @@ package br.com.sw2you.realmeet.utils;
 import static br.com.sw2you.realmeet.utils.TestConstants.DEFAULT_ALLOCATION_EMPLOYEE_EMAIL;
 import static br.com.sw2you.realmeet.utils.TestConstants.DEFAULT_ALLOCATION_EMPLOYEE_NAME;
 import static br.com.sw2you.realmeet.utils.TestConstants.DEFAULT_ALLOCATION_END_AT;
-import static br.com.sw2you.realmeet.utils.TestConstants.DEFAULT_ALLOCATION_ID;
 import static br.com.sw2you.realmeet.utils.TestConstants.DEFAULT_ALLOCATION_START_AT;
 import static br.com.sw2you.realmeet.utils.TestConstants.DEFAULT_ALLOCATION_SUBJECT;
 import static br.com.sw2you.realmeet.utils.TestConstants.DEFAULT_ROOM_ID;
@@ -60,5 +59,9 @@ public final class TestDataCreator {
             .subject(DEFAULT_ALLOCATION_SUBJECT)
             .startAt(DEFAULT_ALLOCATION_START_AT)
             .endAt(DEFAULT_ALLOCATION_END_AT);
+    }
+
+    public static Employee.Builder newEmployee() {
+        return Employee.newBuilder().name(DEFAULT_ALLOCATION_EMPLOYEE_NAME).email(DEFAULT_ALLOCATION_EMPLOYEE_EMAIL);
     }
 }
