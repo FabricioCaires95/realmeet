@@ -24,10 +24,7 @@ import static java.time.Duration.between;
 import br.com.sw2you.realmeet.api.model.CreateAllocationDTO;
 import br.com.sw2you.realmeet.api.model.UpdateAllocationDTO;
 import br.com.sw2you.realmeet.domain.repository.AllocationRepository;
-import br.com.sw2you.realmeet.util.DateUtils;
 import java.time.OffsetDateTime;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 @Component
