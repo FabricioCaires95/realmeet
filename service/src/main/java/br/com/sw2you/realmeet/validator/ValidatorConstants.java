@@ -24,6 +24,7 @@ public final class ValidatorConstants {
     public static final String EXCEEDS_DURATION = ".exceedsDuration";
     public static final String ORDER_BY = ".orderBy";
     public static final String INVALID = ".invalid";
+    public static final String OVERLAPS = ".overlaps";
 
     public static final int ROOM_NAME_MAX_LENGTH = 20;
     public static final int ROOM_SEATS_MIN_VALUE = 1;

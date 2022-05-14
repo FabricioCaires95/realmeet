@@ -19,7 +19,6 @@ import br.com.sw2you.realmeet.exception.AllocationCannotBeUpdatedException;
 import br.com.sw2you.realmeet.exception.AllocationNotFoundException;
 import br.com.sw2you.realmeet.exception.RoomNotFoundException;
 import br.com.sw2you.realmeet.mapper.AllocationMapper;
-import br.com.sw2you.realmeet.util.Constants;
 import br.com.sw2you.realmeet.validator.AllocationValidator;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -73,8 +72,8 @@ public class AllocationService {
 
     @Transactional
     public void updateAllocation(Long allocationId, UpdateAllocationDTO updateAllocationDTO) {
-        allocationValidator.validate(allocationId, updateAllocationDTO);
         var allocation = getAllocationOrThrow(allocationId);
+        allocationValidator.validate(allocationId, allocation.getRoom().getId(), updateAllocationDTO);
 
         if (isAllocationInThePast(allocation)) {
             throw new AllocationCannotBeUpdatedException();
