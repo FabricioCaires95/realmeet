@@ -63,14 +63,14 @@ public abstract class AbstractReportHandler<T, D extends AbstractReportData> {
 
             @Override
             public Object getFieldValue(JRField jrField) throws JRException {
-                return fieldMapperFuncion().apply(jrField, list.get(currentIndex));
+                return fieldMapperFunction().apply(jrField, list.get(currentIndex));
             }
         };
     }
 
     protected abstract List<T> fetchReportDate(D reportData);
 
-    protected abstract BiFunction<JRField, T, Object> fieldMapperFuncion();
+    protected abstract BiFunction<JRField, T, Object> fieldMapperFunction();
 
     private void exportReportToStream(JasperPrint jasperPrint, OutputStream out, ReportFormat reportFormat) {
         try {
