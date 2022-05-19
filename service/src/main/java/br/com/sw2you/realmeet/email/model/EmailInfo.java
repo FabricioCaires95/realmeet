@@ -122,10 +122,6 @@ public class EmailInfo {
 
         private Builder() {}
 
-        public static Builder anEmailInfo() {
-            return new Builder();
-        }
-
         public Builder from(String from) {
             this.from = from;
             return this;

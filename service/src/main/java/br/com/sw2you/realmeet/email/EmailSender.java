@@ -46,7 +46,7 @@ public class EmailSender {
 
         addBasicDetails(emailInfo, mimeMessage);
         addHtmlBody(emailInfo.getTemplate(), emailInfo.getTemplateData(), multiPart);
-        addAttachements(emailInfo.getAttachements(), multiPart);
+        addAttachments(emailInfo.getAttachements(), multiPart);
         setContent(mimeMessage, multiPart);
 
         javaMailSender.send(mimeMessage);
@@ -86,7 +86,7 @@ public class EmailSender {
         }
     }
 
-    private void addAttachements(List<Attachment> attachments, MimeMultipart mimeMultipart) {
+    private void addAttachments(List<Attachment> attachments, MimeMultipart mimeMultipart) {
         if (nonNull(attachments)) {
             attachments.forEach(
                 attachment -> {
@@ -98,6 +98,7 @@ public class EmailSender {
                             )
                         );
                         messageAttachmentPart.setFileName(attachment.getFileName());
+                        mimeMultipart.addBodyPart(messageAttachmentPart);
                     } catch (MessagingException | IOException e) {
                         throEmailSendingException(e, "Error sending attachments to MIME Message");
                     }
