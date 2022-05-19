@@ -51,7 +51,7 @@ public class AllocationReportHandler extends AbstractReportHandler<Allocation, A
 
     @Override
     public AbstractReportValidator getReportValidator() {
-        return null;
+        return allocationReportValidator;
     }
 
     @Override

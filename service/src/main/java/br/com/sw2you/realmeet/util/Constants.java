@@ -6,6 +6,7 @@ public final class Constants {
     public static final String ALLOCATION_REPORT_MAX_MONTHS_INTERVAL =
         "${realmeet.reports.allocationReport.maxMonthsInterval:12}";
     public static final String EMPTY = "";
+    public static final String REPORT = "report_";
 
     private Constants() {}
 }

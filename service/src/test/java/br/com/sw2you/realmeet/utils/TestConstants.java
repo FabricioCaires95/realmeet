@@ -16,6 +16,7 @@ public final class TestConstants {
     public static final long DEFAULT_ALLOCATION_ID = 2L;
     public static final String TEST_CLIENT_API_KEY = "test-api-key";
     public static final String TEST_CLIENT_DESCRIPTION = "Some test client";
+    public static final String EMAIL_TO = "ade@gmail.com";
 
     private TestConstants() {}
 }
