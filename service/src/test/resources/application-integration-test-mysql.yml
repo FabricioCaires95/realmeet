@@ -9,3 +9,5 @@ spring:
     password: admin
   main:
     allow-bean-definition-overriding: true
+  flyway:
+    locations: classpath:/db/migration/mysql

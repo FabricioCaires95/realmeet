@@ -19,7 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles(profiles = "integration-test")
+@ActiveProfiles(profiles = "integration-test-mysql")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = Application.class)
 public abstract class BaseIntegrationTest {
     @Autowired

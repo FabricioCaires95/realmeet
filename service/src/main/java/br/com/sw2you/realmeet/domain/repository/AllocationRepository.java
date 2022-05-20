@@ -28,8 +28,8 @@ public interface AllocationRepository extends JpaRepository<Allocation, Long> {
         "SELECT a FROM Allocation a WHERE " +
         "(:employeeEmail IS NULL OR a.employee.email = :employeeEmail) AND " +
         "(:roomId IS NULL OR a.room.id = :roomId) AND " +
-        "(:startAt IS NULL OR a.startAt >= :startAt) AND " +
-        "(:endAt IS NULL OR a.endAt <= :endAt)"
+        "(cast(:startAt as timestamp) IS NULL OR a.startAt >= :startAt) AND " +
+        "(cast(:endAt as timestamp) IS NULL OR a.endAt <= :endAt)"
     )
     Page<Allocation> findAllWithFilters(
         @Param("employeeEmail") String employeeEmail,
@@ -43,8 +43,8 @@ public interface AllocationRepository extends JpaRepository<Allocation, Long> {
         "SELECT a FROM Allocation a WHERE " +
         "(:employeeEmail IS NULL OR a.employee.email = :employeeEmail) AND " +
         "(:roomId IS NULL OR a.room.id = :roomId) AND " +
-        "(:startAt IS NULL OR a.startAt >= :startAt) AND " +
-        "(:endAt IS NULL OR a.endAt <= :endAt)"
+        "(cast(:startAt as timestamp) IS NULL OR a.startAt >= :startAt) AND " +
+        "(cast(:endAt as timestamp) IS NULL OR a.endAt <= :endAt)"
     )
     List<Allocation> findAllWithFilters(
         @Param("employeeEmail") String employeeEmail,
